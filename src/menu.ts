@@ -1,7 +1,7 @@
 const root = document.getElementById('root')!;
 
 const anchorTags = (href:string, text:string):string => {
-  let result = `<a href=${href}>${text}</a>`;
+  let result = `<a href=#${href}>${text}</a>`;
   return result;
 }
 
@@ -36,10 +36,18 @@ const totalElement= (object:BasicData):string =>{
 }
 
 root.innerHTML=`
-<ul>
+<ul id="menu">
   ${totalElement(basicData)}
 </ul>
+<main id="main-target"></main>
 `
 
 // -----------------------------------------------------------------------------//
 // 조립 컴포넌트 //
+
+const mainTarget = document.getElementById("main-target")!;
+console.log(window.location.hash);
+
+window.addEventListener('hashchange',()=>{
+  mainTarget.innerHTML=basicData.jaemin
+})

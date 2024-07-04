@@ -2,7 +2,7 @@
 
 var root = document.getElementById('root');
 var anchorTags = function anchorTags(href, text) {
-  var result = "<a href=".concat(href, ">").concat(text, "</a>");
+  var result = "<a href=#".concat(href, ">").concat(text, "</a>");
   return result;
 };
 var liTags = function liTags(children) {
@@ -24,4 +24,13 @@ var totalElement = function totalElement(object) {
   }
   return result;
 };
-root.innerHTML = "\n<ul>\n  ".concat(totalElement(basicData), "\n</ul>\n");
+root.innerHTML = "\n<ul id=\"menu\">\n  ".concat(totalElement(basicData), "\n</ul>\n<main id=\"main-target\"></main>\n");
+
+// -----------------------------------------------------------------------------//
+// 조립 컴포넌트 //
+
+var mainTarget = document.getElementById("main-target");
+console.log(window.location.hash);
+window.addEventListener('hashchange', function () {
+  mainTarget.innerHTML = basicData.jaemin;
+});
