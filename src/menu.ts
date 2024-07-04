@@ -10,20 +10,28 @@ const liTags = (children:string):string => {
   return result
 }
 
-const basicData ={
-  jeamin: "재민",
+
+interface BasicData {
+  jaemin: "재민",
   ujin : "유진",
   jiyun: "지윤",
   hoyoung: "호영"
 }
 
-const totalElement= () =>{
-  let result = liTags(anchorTags('#jiyun','도릉'));
+const basicData:BasicData ={
+  jaemin: "재민",
+  ujin : "유진",
+  jiyun: "지윤",
+  hoyoung: "호영"
+}
+
+const totalElement= (object:BasicData):string =>{
+  let result = liTags(anchorTags(`#${object.jaemin}`,object.jaemin));
   return result
 }
 
 root.innerHTML=`
 <ul>
-  ${totalElement()}
+  ${totalElement(basicData)}
 </ul>
 `
