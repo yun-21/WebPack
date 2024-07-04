@@ -16,7 +16,12 @@ var basicData = {
   hoyoung: "호영"
 };
 var totalElement = function totalElement(object) {
-  var result = liTags(anchorTags("#".concat(object.jaemin), object.jaemin));
+  var result = '';
+  for (var key in object) {
+    // TypeScript가 key가 BasicData의 키인 것을 알게 함
+    var value = object[key];
+    result += liTags(anchorTags(key, value));
+  }
   return result;
 };
 root.innerHTML = "\n<ul>\n  ".concat(totalElement(basicData), "\n</ul>\n");
