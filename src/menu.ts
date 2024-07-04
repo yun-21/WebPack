@@ -1,55 +1,99 @@
-const root = document.getElementById('root')!;
+const root = document.getElementById('root') as HTMLDivElement;
 
-const anchorTags = (href:string, text:string):string => {
-  let result = `<a href=#${href}>${text}</a>`;
+
+const anchorTags = (href:string, textNode:string):string => {
+  let result = `<a href="#${href}">${textNode}</a>`;
   return result;
 }
 
 const liTags = (children:string):string => {
-  let result =`<li>${children}</li>`;
-  return result
+  let result = `<li>${children}</li>`;
+  return result;
 }
 
 
 interface BasicData {
-  jaemin: "재민",
-  ujin : "유진",
-  jiyun: "지윤",
-  hoyoung: "호영",
+  jeamin: {
+    name: '재민',
+    backgroundColor: 'red',
+  },
+  hoyoung: {
+    name: "호영",
+    backgroundColor: "green",
+  },
+  ujin: {
+    name: "유진",
+    backgroundColor: "yellow",
+  
+  },
+  jiyoon: {
+    name: "지윤",
+    backgroundColor: "purple",
+  },
+  ukjae: {
+    name: "욱재",
+    backgroundColor: "blue",
+  }
 }
 
-const basicData:BasicData ={
-  jaemin: "재민",
-  ujin : "유진",
-  jiyun: "지윤",
-  hoyoung: "호영"
+const basicData:BasicData = {
+  jeamin: {
+    name: '재민',
+    backgroundColor: 'red',
+  },
+  hoyoung: {
+    name: "호영",
+    backgroundColor: "green",
+  },
+  ujin: {
+    name: "유진",
+    backgroundColor: "yellow",
+  
+  },
+  jiyoon: {
+    name: "지윤",
+    backgroundColor: "purple",
+  },
+  ukjae: {
+    name: "욱재",
+    backgroundColor: "blue",
+  }
 }
 
-const totalElement= (object:BasicData):string =>{
+const totalElement = (object:BasicData):string => {
   let result = '';
+
   for (let key in object) {
-    // TypeScript가 key가 BasicData의 키인 것을 알게 함
     const value = object[key as keyof BasicData];
-    result += liTags(anchorTags(key, value));
+    result += liTags(anchorTags(key, value.name));
   }
   return result;
 }
 
-root.innerHTML=`
+root.innerHTML = `
 <ul id="menu">
   ${totalElement(basicData)}
 </ul>
 <main id="main-target"></main>
-`
+`;
 
-// -----------------------------------------------------------------------------//
-// 조립 컴포넌트 //
+// ------------------------------------------------------------------
+// * HTML을 대신해서 만든 HTML 작성 코드
+// * React, CSR
 
-const mainTarget = document.getElementById("main-target")!;
+const mainTarget = document.getElementById('main-target')!;
 console.log(window.location.hash);
 
-window.addEventListener('hashchange',()=>{
+window.addEventListener('hashchange', () => {
   const hash = window.location.hash;
-  console.log(hash.slice(1))
-  mainTarget.innerHTML=basicData.jaemin
-})
+  console.log(hash.slice(1));
+  let test = basicData[hash.slice(1) as keyof BasicData];
+  let div = document.createElement('div');
+  div.style.backgroundColor = test.backgroundColor;
+  div.textContent = test.name;
+  if(mainTarget.hasChildNodes()) {
+    mainTarget.removeChild(mainTarget.childNodes[0]);
+  }
+  mainTarget.appendChild(div);
+
+});
