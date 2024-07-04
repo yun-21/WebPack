@@ -1,8 +1,8 @@
 "use strict";
 
 var root = document.getElementById('root');
-var anchorTags = function anchorTags(href, textNode) {
-  var result = "<a href=\"#".concat(href, "\">").concat(textNode, "</a>");
+var anchorTags = function anchorTags(href, text) {
+  var result = "<a href=\"#".concat(href, "\">").concat(text, "</a>");
   return result;
 };
 var liTags = function liTags(children) {
@@ -10,21 +10,17 @@ var liTags = function liTags(children) {
   return result;
 };
 var basicData = {
-  jeamin: {
-    name: '재민',
-    backgroundColor: 'red'
-  },
-  hoyoung: {
-    name: "호영",
-    backgroundColor: "green"
+  jaemin: {
+    name: "재민",
+    backgroundColor: "red"
   },
   ujin: {
     name: "유진",
     backgroundColor: "yellow"
   },
-  jiyoon: {
+  jiyun: {
     name: "지윤",
-    backgroundColor: "purple"
+    backgroundColor: "pink"
   },
   ukjae: {
     name: "욱재",
@@ -34,6 +30,7 @@ var basicData = {
 var totalElement = function totalElement(object) {
   var result = '';
   for (var key in object) {
+    // TypeScript가 key가 BasicData의 키인 것을 알게 함
     var value = object[key];
     result += liTags(anchorTags(key, value.name));
   }
@@ -41,11 +38,10 @@ var totalElement = function totalElement(object) {
 };
 root.innerHTML = "\n<ul id=\"menu\">\n  ".concat(totalElement(basicData), "\n</ul>\n<main id=\"main-target\"></main>\n");
 
-// ------------------------------------------------------------------
-// * HTML을 대신해서 만든 HTML 작성 코드
-// * React, CSR
+// -----------------------------------------------------------------------------//
+// 조립 컴포넌트 //
 
-var mainTarget = document.getElementById('main-target');
+var mainTarget = document.getElementById("main-target");
 console.log(window.location.hash);
 window.addEventListener('hashchange', function () {
   var hash = window.location.hash;
