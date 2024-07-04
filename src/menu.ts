@@ -1,7 +1,7 @@
 const root = document.getElementById('root')!;
 
-const anchorTags = ():string => {
-  let result = '<a href="#">메뉴</a>';
+const anchorTags = (href:string, text:string):string => {
+  let result = `<a href=${href}>${text}</a>`;
   return result;
 }
 
@@ -11,6 +11,6 @@ const liTags = (children:string):string => {
 }
 root.innerHTML=`
 <ul>
-  ${liTags(anchorTags())}
+  ${liTags(anchorTags("#jiyun",'도릉'))}
 </ul>
 `
