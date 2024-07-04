@@ -15,7 +15,7 @@ interface BasicData {
   jaemin: "재민",
   ujin : "유진",
   jiyun: "지윤",
-  hoyoung: "호영"
+  hoyoung: "호영",
 }
 
 const basicData:BasicData ={
@@ -26,8 +26,13 @@ const basicData:BasicData ={
 }
 
 const totalElement= (object:BasicData):string =>{
-  let result = liTags(anchorTags(`#${object.jaemin}`,object.jaemin));
-  return result
+  let result = '';
+  for (let key in object) {
+    // TypeScript가 key가 BasicData의 키인 것을 알게 함
+    const value = object[key as keyof BasicData];
+    result += liTags(anchorTags(key, value));
+  }
+  return result;
 }
 
 root.innerHTML=`
